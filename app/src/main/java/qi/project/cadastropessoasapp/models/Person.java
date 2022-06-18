@@ -75,11 +75,9 @@ public class Person {
 
     @Override
     public String toString() {
-        return  "\nCPF: " + cpf +
-                "\nNome: " + name +
+        return  "\nNome: " + name +
+                "\nCPF: " + cpf +
                 "\nGênero: " + gender +
-                "\nRenda=" + String.format("%.2f", income) +
-                "\nPai: " + fatherCpf +
-                "\nMãe: " + motherCpf;
+                "\nRenda Mensal: R$" + String.format("%.2f", income);
     }
 }
