@@ -35,6 +35,7 @@ public class activity_addPerson extends AppCompatActivity {
         RadioGroup rdGender = findViewById(R.id.rdGender);
         EditText txtSocialName = findViewById(R.id.txtSocialName);
         EditText txtIncome = findViewById(R.id.txtIncome);
+        RadioButton rbtnOther = findViewById(R.id.rbtnOther);
 
         int selectedRadioGroupItem = rdGender.getCheckedRadioButtonId();
 
@@ -47,7 +48,10 @@ public class activity_addPerson extends AppCompatActivity {
             person = new Person(txtCpf.getText().toString(),
                     txtName.getText().toString().toUpperCase(),
                     radioButton.getText().toString().toUpperCase());
-                    person.setIncome(Double.parseDouble(txtIncome.getText().toString()));
+            person.setIncome(Double.parseDouble(txtIncome.getText().toString()));
+            if(rbtnOther.isChecked()){
+                person.setSocialName(txtSocialName.getText().toString().toUpperCase());
+            }
             DataBaseHelper dataBaseHelper = new DataBaseHelper(activity_addPerson.this);
             boolean success = dataBaseHelper.addPerson(person);
             Intent intent = new Intent(activity_addPerson.this, MainActivity.class);

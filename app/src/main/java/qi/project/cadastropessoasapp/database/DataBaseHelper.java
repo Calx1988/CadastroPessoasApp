@@ -1,20 +1,16 @@
 package qi.project.cadastropessoasapp.database;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
-import qi.project.cadastropessoasapp.MainActivity;
 import qi.project.cadastropessoasapp.models.Person;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
@@ -120,5 +116,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return person;
+    }
+
+    public boolean deletePerson(String cpf){
+        String queryString = "DELETE FROM " + PERSON_TABLE + " WHERE " + COLUMN_PERSON_CPF + " LIKE(" + cpf + ")";
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(queryString);
+        db.close();
+        return true;
     }
 }
