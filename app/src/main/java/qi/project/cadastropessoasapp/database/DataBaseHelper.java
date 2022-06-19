@@ -1,10 +1,12 @@
 package qi.project.cadastropessoasapp.database;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -12,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
+import qi.project.cadastropessoasapp.MainActivity;
 import qi.project.cadastropessoasapp.models.Person;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
@@ -92,10 +95,30 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public Person findPerson(String cpf){
-        Person person = new Person();
         String queryString = "SELECT * FROM " + PERSON_TABLE + " WHERE " + COLUMN_PERSON_CPF + " LIKE(" + cpf + ")";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
-        return null;
+        Person person = new Person();
+        if (cursor.moveToFirst()){
+            do{
+                String personCpf = cursor.getString(0);
+                String personName = cursor.getString(1);
+                String personGender = cursor.getString(2);
+                String personSocialName = cursor.getString(3);
+                String personFatherCpf = cursor.getString(4);
+                String personMotherCpf = cursor.getString(5);
+                Double personIncome = cursor.getDouble(6);
+                person.setCpf(personCpf);
+                person.setName(personName);
+                person.setGender(personGender);
+                person.setSocialName(personSocialName);
+                person.setFatherCpf(personFatherCpf);
+                person.setMotherCpf(personMotherCpf);
+                person.setIncome(personIncome);
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return person;
     }
 }

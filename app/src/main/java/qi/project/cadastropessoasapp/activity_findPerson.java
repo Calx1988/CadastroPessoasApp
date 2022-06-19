@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.io.Serializable;
+
+import qi.project.cadastropessoasapp.database.DataBaseHelper;
 import qi.project.cadastropessoasapp.models.Person;
 
 public class activity_findPerson extends AppCompatActivity {
@@ -23,7 +26,20 @@ public class activity_findPerson extends AppCompatActivity {
         btnFindPerson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DataBaseHelper dataBaseHelper = new DataBaseHelper(activity_findPerson.this);
+                Person person = dataBaseHelper.findPerson(txtParentCpf.getText().toString());
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("cpf", person.getCpf());
+                bundle.putSerializable("name", person.getName());
+                bundle.putSerializable("gender", person.getGender());
+                bundle.putSerializable("socialName", person.getSocialName());
+                bundle.putSerializable("fatherCpf", person.getFatherCpf());
+                bundle.putSerializable("motherCpf", person.getMotherCpf());
+                bundle.putSerializable("income", person.getIncome());
 
+                Intent intent = new Intent(activity_findPerson.this, activity_viewPerson.class);
+                intent.putExtra("bundle", bundle);
+                startActivity(intent);
             }
         });
 
