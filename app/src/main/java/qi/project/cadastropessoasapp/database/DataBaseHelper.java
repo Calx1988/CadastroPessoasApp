@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,5 +89,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return returnList;
+    }
+
+    public Person findPerson(String cpf){
+        Person person = new Person();
+        String queryString = "SELECT * FROM " + PERSON_TABLE + " WHERE " + COLUMN_PERSON_CPF + " LIKE(" + cpf + ")";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+        return null;
     }
 }
