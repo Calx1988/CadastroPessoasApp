@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CadastroPessoasApp">
         <activity
+            android:name=".activity_addParent"
+            android:exported="false" />
+        <activity
             android:name=".activity_viewPerson"
             android:exported="false" />
         <activity

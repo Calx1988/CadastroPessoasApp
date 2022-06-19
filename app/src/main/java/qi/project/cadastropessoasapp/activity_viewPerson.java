@@ -51,6 +51,15 @@ public class activity_viewPerson extends AppCompatActivity {
             txtPersonSocialName.setText(newBundle.getSerializable("socialName").toString());
         }
 
+        Button btnAddParent = findViewById(R.id.btnAddParent);
+        btnAddParent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity_viewPerson.this, activity_findPerson.class);
+                startActivity(intent);
+            }
+        });
+
         Button btnReturnList = findViewById(R.id.btnReturnList);
         btnReturnList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +77,8 @@ public class activity_viewPerson extends AppCompatActivity {
                 boolean success = dataBaseHelper.deletePerson(newBundle.getSerializable("cpf").toString());
                 if(success){
                     Toast.makeText(activity_viewPerson.this, "Pessoa excluída com sucesso.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(activity_viewPerson.this, MainActivity.class);
+                    startActivity(intent);
                 }else{
                     Toast.makeText(activity_viewPerson.this, "Falha na exclusão.", Toast.LENGTH_SHORT).show();
                 }

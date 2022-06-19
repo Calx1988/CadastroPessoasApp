@@ -38,7 +38,6 @@ public class activity_findPerson extends AppCompatActivity {
                 bundle.putSerializable("motherCpf", person.getMotherCpf());
                 bundle.putSerializable("income", person.getIncome());
                 Toast.makeText(activity_findPerson.this, person.toString(), Toast.LENGTH_SHORT).show();
-
                 Intent intent = new Intent(activity_findPerson.this, activity_viewPerson.class);
                 intent.putExtra("bundle", bundle);
                 startActivity(intent);
